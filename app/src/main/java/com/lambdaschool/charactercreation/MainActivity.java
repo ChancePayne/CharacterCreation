@@ -1,6 +1,9 @@
 package com.lambdaschool.charactercreation;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,8 +11,10 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public ImageView[][] images; // add this
-    public int[] selected;
+    private ImageView[][] images; // add this
+    private int[] selected;
+
+    private CharacterViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         selected = new int[6];
 
         populateImages();
+
+        viewModel = ViewModelProviders.of(this).get(CharacterViewModel.class);
+        viewModel.getCharacter().observe(this, new Observer<int[]>() {
+            @Override
+            public void onChanged(@Nullable int[] ints) {
+                for(int i = 0; i < images.length; ++i) {
+                    for(int j = 0; j < images[i].length; ++j) {
+                        images[i][j].setBackgroundColor(Color.WHITE);
+                    }
+                }
+
+                for(int n = 0; n < ints.length; ++n) {
+                    if(ints[n] != 0) {
+                        ((ImageView) findViewById(ints[n])).setBackgroundColor(Color.MAGENTA);
+                    }
+                }
+            }
+        });
+
     }
 
     private void populateImages() {
@@ -133,50 +157,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.image_0_2:
             case R.id.image_0_3:
             case R.id.image_0_4:
-                selected[0] = v.getId();
+//                selected[0] = v.getId();
+                viewModel.updateData(0, v.getId());
                 break;
             case R.id.image_1_1:
             case R.id.image_1_2:
             case R.id.image_1_3:
             case R.id.image_1_4:
-                selected[1] = v.getId();
+//                selected[1] = v.getId();
+                viewModel.updateData(1, v.getId());
                 break;
             case R.id.image_2_1:
             case R.id.image_2_2:
             case R.id.image_2_3:
             case R.id.image_2_4:
-                selected[2] = v.getId();
+//                selected[2] = v.getId();
+                viewModel.updateData(2, v.getId());
                 break;
             case R.id.image_3_1:
             case R.id.image_3_2:
             case R.id.image_3_3:
             case R.id.image_3_4:
-                selected[3] = v.getId();
+//                selected[3] = v.getId();
+                viewModel.updateData(3, v.getId());
                 break;
             case R.id.image_4_1:
             case R.id.image_4_2:
             case R.id.image_4_3:
             case R.id.image_4_4:
-                selected[4] = v.getId();
+//                selected[4] = v.getId();
+                viewModel.updateData(4, v.getId());
                 break;
             case R.id.image_5_1:
             case R.id.image_5_2:
             case R.id.image_5_3:
             case R.id.image_5_4:
-                selected[5] = v.getId();
+//                selected[5] = v.getId();
+                viewModel.updateData(5, v.getId());
                 break;
         }
 
-        for(int i = 0; i < images.length; ++i) {
-            for(int j = 0; j < images[i].length; ++j) {
-                images[i][j].setBackgroundColor(Color.WHITE);
-            }
-        }
-
-        for(int n = 0; n < selected.length; ++n) {
-            if(selected[n] != 0) {
-                ((ImageView) findViewById(selected[n])).setBackgroundColor(Color.MAGENTA);
-            }
-        }
     }
 }
