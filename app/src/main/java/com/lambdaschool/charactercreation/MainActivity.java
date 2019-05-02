@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         populateImages();
 
         viewModel = ViewModelProviders.of(this).get(CharacterViewModel.class);
-        viewModel.getCharacter().observe(this, new Observer<int[]>() {
+        viewModel.getCharacter(this).observe(this, new Observer<int[]>() {
             @Override
             public void onChanged(@Nullable int[] ints) {
                 for(int i = 0; i < images.length; ++i) {
