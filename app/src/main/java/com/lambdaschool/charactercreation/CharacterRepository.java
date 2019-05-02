@@ -18,10 +18,21 @@ public class CharacterRepository {
     }
 
     public MutableLiveData<int[]> getData() {
-        MutableLiveData<int[]> liveData = new MutableLiveData<>();
+        final MutableLiveData<int[]> liveData = new MutableLiveData<>();
 
         // retrieve data from storage (local database, network storage)
-        data = readSharedPreferences();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                liveData.postValue(readSharedPreferences());
+            }
+        }).start();
+
 
         liveData.setValue(data);
         return liveData;
@@ -41,8 +52,13 @@ public class CharacterRepository {
     public int[] updateData(int index, int value) {
         data[index] = value;
 
-        // store data persistently (local database, network storage)
-        storeSharedPreferences(data);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // store data persistently (local database, network storage)
+                storeSharedPreferences(data);
+            }
+        }).start();
 
         return data;
     }
