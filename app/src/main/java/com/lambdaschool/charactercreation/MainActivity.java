@@ -1,51 +1,182 @@
 package com.lambdaschool.charactercreation;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
-
+    public ImageView[][] images; // add this
+    public int[] selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        images = new ImageView[4][6]; // add this
+        selected = new int[6];
+
         populateImages();
     }
 
     private void populateImages() {
         // row 0 - hold
-        ((ImageView)findViewById(R.id.image_0_1)).setImageDrawable(getDrawable(R.drawable.axe_t));
-        ((ImageView)findViewById(R.id.image_0_2)).setImageDrawable(getDrawable(R.drawable.book_t));
-        ((ImageView)findViewById(R.id.image_0_3)).setImageDrawable(getDrawable(R.drawable.dinner_t));
-        ((ImageView)findViewById(R.id.image_0_4)).setImageDrawable(getDrawable(R.drawable.first_t));
+        images[0][0] = ((ImageView)findViewById(R.id.image_0_1));
+        images[0][0].setImageDrawable(getDrawable(R.drawable.axe_t));
+        images[0][0].setOnClickListener(this);
+
+        images[1][0] = ((ImageView)findViewById(R.id.image_0_2));
+        images[1][0].setImageDrawable(getDrawable(R.drawable.book_t));
+        images[1][0].setOnClickListener(this);
+
+        images[2][0] = ((ImageView)findViewById(R.id.image_0_3));
+        images[2][0].setImageDrawable(getDrawable(R.drawable.dinner_t));
+        images[2][0].setOnClickListener(this);
+
+        images[3][0] = ((ImageView)findViewById(R.id.image_0_4));
+        images[3][0].setImageDrawable(getDrawable(R.drawable.first_t));
+        images[3][0].setOnClickListener(this);
+
         // row 1 - protect
-        ((ImageView)findViewById(R.id.image_1_1)).setImageDrawable(getDrawable(R.drawable.armor_body_t));
-        ((ImageView)findViewById(R.id.image_1_2)).setImageDrawable(getDrawable(R.drawable.armor_t));
-        ((ImageView)findViewById(R.id.image_1_3)).setImageDrawable(getDrawable(R.drawable.hat_t));
-        ((ImageView)findViewById(R.id.image_1_4)).setImageDrawable(getDrawable(R.drawable.helmet_t));
+        images[0][1] = ((ImageView)findViewById(R.id.image_1_1));
+        images[0][1].setImageDrawable(getDrawable(R.drawable.armor_body_t));
+        images[0][1].setOnClickListener(this);
+
+        images[1][1] = ((ImageView)findViewById(R.id.image_1_2));
+        images[1][1].setImageDrawable(getDrawable(R.drawable.armor_t));
+        images[1][1].setOnClickListener(this);
+
+        images[2][1] = ((ImageView)findViewById(R.id.image_1_3));
+        images[2][1].setImageDrawable(getDrawable(R.drawable.hat_t));
+        images[2][1].setOnClickListener(this);
+
+        images[3][1] = ((ImageView)findViewById(R.id.image_1_4));
+        images[3][1].setImageDrawable(getDrawable(R.drawable.helmet_t));
+        images[3][1].setOnClickListener(this);
+
         // row 2 - goal
-        ((ImageView)findViewById(R.id.image_2_1)).setImageDrawable(getDrawable(R.drawable.crown_t));
-        ((ImageView)findViewById(R.id.image_2_2)).setImageDrawable(getDrawable(R.drawable.feathers_t));
-        ((ImageView)findViewById(R.id.image_2_3)).setImageDrawable(getDrawable(R.drawable.gold_t));
-        ((ImageView)findViewById(R.id.image_2_4)).setImageDrawable(getDrawable(R.drawable.heart_t));
+        images[0][2] = ((ImageView)findViewById(R.id.image_2_1));
+        images[0][2].setImageDrawable(getDrawable(R.drawable.crown_t));
+        images[0][2].setOnClickListener(this);
+
+        images[1][2] = ((ImageView)findViewById(R.id.image_2_2));
+        images[1][2].setImageDrawable(getDrawable(R.drawable.feathers_t));
+        images[1][2].setOnClickListener(this);
+
+        images[2][2] = ((ImageView)findViewById(R.id.image_2_3));
+        images[2][2].setImageDrawable(getDrawable(R.drawable.gold_t));
+        images[2][2].setOnClickListener(this);
+
+        images[3][2] = ((ImageView)findViewById(R.id.image_2_4));
+        images[3][2].setImageDrawable(getDrawable(R.drawable.heart_t));
+        images[3][2].setOnClickListener(this);
+
         // row 3 - skill
-        ((ImageView)findViewById(R.id.image_3_1)).setImageDrawable(getDrawable(R.drawable.target_t));
-        ((ImageView)findViewById(R.id.image_3_2)).setImageDrawable(getDrawable(R.drawable.dialog_t));
-        ((ImageView)findViewById(R.id.image_3_3)).setImageDrawable(getDrawable(R.drawable.war_t));
-        ((ImageView)findViewById(R.id.image_3_4)).setImageDrawable(getDrawable(R.drawable.fix_t));
+        images[0][3] = ((ImageView)findViewById(R.id.image_3_1));
+        images[0][3].setImageDrawable(getDrawable(R.drawable.target_t));
+        images[0][3].setOnClickListener(this);
+
+        images[1][3] = ((ImageView)findViewById(R.id.image_3_2));
+        images[1][3].setImageDrawable(getDrawable(R.drawable.dialog_t));
+        images[1][3].setOnClickListener(this);
+
+        images[2][3] = ((ImageView)findViewById(R.id.image_3_3));
+        images[2][3].setImageDrawable(getDrawable(R.drawable.war_t));
+        images[2][3].setOnClickListener(this);
+
+        images[3][3] = ((ImageView)findViewById(R.id.image_3_4));
+        images[3][3].setImageDrawable(getDrawable(R.drawable.fix_t));
+        images[3][3].setOnClickListener(this);
+
         // row 4 - food
-        ((ImageView)findViewById(R.id.image_4_1)).setImageDrawable(getDrawable(R.drawable.food_t));
-        ((ImageView)findViewById(R.id.image_4_2)).setImageDrawable(getDrawable(R.drawable.carrot_t));
-        ((ImageView)findViewById(R.id.image_4_3)).setImageDrawable(getDrawable(R.drawable.beer_t));
-        ((ImageView)findViewById(R.id.image_4_4)).setImageDrawable(getDrawable(R.drawable.lollipop_t));
+        images[0][4] = ((ImageView)findViewById(R.id.image_4_1));
+        images[0][4].setImageDrawable(getDrawable(R.drawable.food_t));
+        images[0][4].setOnClickListener(this);
+
+        images[1][4] = ((ImageView)findViewById(R.id.image_4_2));
+        images[1][4].setImageDrawable(getDrawable(R.drawable.carrot_t));
+        images[1][4].setOnClickListener(this);
+
+        images[2][4] = ((ImageView)findViewById(R.id.image_4_3));
+        images[2][4].setImageDrawable(getDrawable(R.drawable.beer_t));
+        images[2][4].setOnClickListener(this);
+
+        images[3][4] = ((ImageView)findViewById(R.id.image_4_4));
+        images[3][4].setImageDrawable(getDrawable(R.drawable.lollipop_t));
+        images[3][4].setOnClickListener(this);
+
         // row 5 - allegiance
-        ((ImageView)findViewById(R.id.image_5_1)).setImageDrawable(getDrawable(R.drawable.baner_t));
-        ((ImageView)findViewById(R.id.image_5_2)).setImageDrawable(getDrawable(R.drawable.flag_02_t));
-        ((ImageView)findViewById(R.id.image_5_3)).setImageDrawable(getDrawable(R.drawable.flag_t));
-        ((ImageView)findViewById(R.id.image_5_4)).setImageDrawable(getDrawable(R.drawable.portal_t));
+        images[0][5] = ((ImageView)findViewById(R.id.image_5_1));
+        images[0][5].setImageDrawable(getDrawable(R.drawable.baner_t));
+        images[0][5].setOnClickListener(this);
+
+        images[1][5] = ((ImageView)findViewById(R.id.image_5_2));
+        images[1][5].setImageDrawable(getDrawable(R.drawable.flag_02_t));
+        images[1][5].setOnClickListener(this);
+
+        images[2][5] = ((ImageView)findViewById(R.id.image_5_3));
+        images[2][5].setImageDrawable(getDrawable(R.drawable.flag_t));
+        images[2][5].setOnClickListener(this);
+
+        images[3][5] = ((ImageView)findViewById(R.id.image_5_4));
+        images[3][5].setImageDrawable(getDrawable(R.drawable.portal_t));
+        images[3][5].setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.image_0_1:
+            case R.id.image_0_2:
+            case R.id.image_0_3:
+            case R.id.image_0_4:
+                selected[0] = v.getId();
+                break;
+            case R.id.image_1_1:
+            case R.id.image_1_2:
+            case R.id.image_1_3:
+            case R.id.image_1_4:
+                selected[1] = v.getId();
+                break;
+            case R.id.image_2_1:
+            case R.id.image_2_2:
+            case R.id.image_2_3:
+            case R.id.image_2_4:
+                selected[2] = v.getId();
+                break;
+            case R.id.image_3_1:
+            case R.id.image_3_2:
+            case R.id.image_3_3:
+            case R.id.image_3_4:
+                selected[3] = v.getId();
+                break;
+            case R.id.image_4_1:
+            case R.id.image_4_2:
+            case R.id.image_4_3:
+            case R.id.image_4_4:
+                selected[4] = v.getId();
+                break;
+            case R.id.image_5_1:
+            case R.id.image_5_2:
+            case R.id.image_5_3:
+            case R.id.image_5_4:
+                selected[5] = v.getId();
+                break;
+        }
+
+        for(int i = 0; i < images.length; ++i) {
+            for(int j = 0; j < images[i].length; ++j) {
+                images[i][j].setBackgroundColor(Color.WHITE);
+            }
+        }
+
+        for(int n = 0; n < selected.length; ++n) {
+            if(selected[n] != 0) {
+                ((ImageView) findViewById(selected[n])).setBackgroundColor(Color.MAGENTA);
+            }
+        }
     }
 }
